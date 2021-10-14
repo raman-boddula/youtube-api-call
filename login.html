@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <link rel="icon" href="https://qonaskamkuk.com/wp-content/uploads/2019/08/youtube-logo-1024x1024.png">
+    <title>Login's Page | YouTube</title>
+</head>
+<style>
+    * {
+        font-family: Roboto, sans-serif;
+    }
+
+.heading{
+    width: 400px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 100px;
+    
+}
+.heading button{
+    background-color: transparent;
+    border: 1px solid red;
+    font-weight: regular;
+    padding: 10px 30px 10px 30px;
+    line-height: 1.4;
+    font-size: large;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+    .container{
+        margin-top: 100px;
+        border: 1px solid #E0E0E0;
+        border-top-right-radius: 5px;
+        border-top-left-radius: 5px;
+        margin: auto;
+        width: 400px;
+        display: flex;
+        flex-direction: column;
+    }
+    .box {
+        display: flex;
+        flex-direction: column;
+        box-sizing: border-box;
+        padding: 20px
+
+    }
+    .box input{
+        width: 93%;
+        padding: 12.5px;
+ margin-bottom: 20px;
+ font-size: 16px;
+ border: 1px solid #E0E0E0;
+    }
+    .container button{
+        padding: 12.5px;
+        font-size: 16px;
+        border-radius: 5px;
+        border: none;
+        color:  white;
+        cursor: pointer;
+
+    
+    }
+    .clr {
+        color: red;
+    }
+    .bg {
+        background-color: red ;
+    }
+    a{
+        text-decoration: none;
+        color:red;
+    }
+    @media ( max-width : 500px){
+        .container {
+            width: 100%;
+        }
+        .heading {
+            width : 100%;
+        }
+    }
+
+</style>
+<body>
+    <div class="heading">
+   <a href="index.html">  <img src="https://cdn57.androidauthority.net/wp-content/uploads/2017/08/new-youtube-logo.jpg " width="25%"></a>
+        <button class="clr"> <a href="signup.html">Sign Up</a> </button>
+    </div>
+    <div class="container">
+        <img src="https://cdn57.androidauthority.net/wp-content/uploads/2017/08/new-youtube-logo.jpg" width="100%" alt="logo" >
+    <form class="box" id="myForm">
+        <h2>Login to your account</h2>
+                   
+    <input type="email" id="email" placeholder="Email" required/>
+   
+    <input type="password" id = "password"  placeholder="Password" required/>
+    <button  id="submit" class="bg" onclick='signin(event)' style="width: 100%">Log In</button>
+    </form>
+    </div>
+</body>
+<script>
+     var bussiness_user = JSON.parse(localStorage.getItem('user_details'))
+    console.log(user_details);
+
+    function signin(e){
+       let count = 0;
+       let istrue = false;
+       e.preventDefault();
+
+       
+       let myForm = document.getElementById('myForm');
+ 
+       let name = myForm.name.value;
+       let email = myForm.email.value;
+       let password = myForm.password.value;
+       bussiness_user.forEach(function(user) {
+           count = 0;
+           if ( email == user.email && password == user.password) {
+               istrue = true;
+           }
+
+           
+      
+       })
+      console.log(istrue);
+      if ( istrue){
+        swal("Congratulations!", "you are right person!", "success");
+         
+         setTimeout(()=>
+         window.location.href="index.html",2000
+         );
+      }
+      else if ( !istrue){
+        swal("Oops!", "Invailed email and password!!", "error");
+          
+      }
+    }
+</script>
+</html>

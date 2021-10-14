@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <link rel="icon" href="https://qonaskamkuk.com/wp-content/uploads/2019/08/youtube-logo-1024x1024.png">
+    <title>Signp Page | YouTube</title>
+</head>
+<style>
+    *{
+        font-family: Roboto, sans-serif;
+    }
+.container{
+  margin: auto;
+  width: 450px;
+  display: flex;
+  flex-direction: column;
+}
+.heading{
+    display: flex;
+    justify-content: space-between;
+    
+}
+.heading button{
+    background-color: transparent;
+    border: 1px solid red;
+    font-weight: regular;
+    padding: 10px 30px 10px 30px;
+    line-height: 1.4;
+    font-size: large;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+.box {
+  margin-top:50px;
+  border: 1px solid #E0E0E0;
+  box-sizing: border-box;
+  padding: 20px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+
+}
+.box_heading{
+    color: grey;
+    font-size: regular;
+    
+}
+.box_heading h2{
+    color: rgb(54, 52, 52);
+}
+.box_form{
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+
+}
+
+
+.clr {
+    color: red;
+}
+a{
+    text-decoration: none;
+    color: red;
+}
+#phone_number{
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+}
+#phone_number  input{
+    padding: 12.5px;
+    font-size: 16px;
+    width: 60%;
+    border: 1px solid #E0E0E0;
+    
+}
+
+#phone_number  button{
+    cursor: pointer;
+    padding: 6px;
+    width: 20%;
+    font-size: 16px;
+    background:transparent;
+    border: 1px solid #E0E0E0;;
+    border-radius: 5px;
+}
+#myForm > input {
+ width: 93%;
+ padding: 12.5px;
+ margin-bottom: 20px;
+ font-size: 16px;
+ border: 1px solid #E0E0E0;
+ 
+ 
+ 
+
+}
+#submit{
+   width: 100%;
+   border: none;
+   padding: 12.5px;
+   margin-top: 48%;
+   color : white;
+   border-radius: 5px;
+   cursor: pointer;
+}
+
+.zero_margin{
+
+    margin: 0;
+}
+.bg {
+    background-color:red; 
+}
+.gy{
+    color: grey;
+}
+a{
+    text-decoration: none;
+}
+
+@media (max-width: 500px){
+    .container {
+        width: 100%;
+    }
+}
+</style>
+<body>
+    <div class="container">
+        <div class="heading">
+           <a href="index.html"> <img src="https://cdn57.androidauthority.net/wp-content/uploads/2017/08/new-youtube-logo.jpg " width="25%"></a>
+            <button class="clr"> <a href="login.html"> Log In </a></button>
+        </div>
+        <div class="box">
+             <div class="box_heading">
+                 <h2 class="zero_margin">Welcome To YouTube</h2>
+                 <p class="zero_margin">Create Your Account to start Watching</p>
+             </div>
+             <div class="box_form">
+                <div id="phone_number">
+                    <input type="number" id="phone" placeholder="Phone Number"  required/>
+                    <button id="btn" class="gy">Send OTP</button>  
+                    </div>
+                    <div id="phone_number">
+                    <input id="otp" placeholder="Enter OTP">
+                    <button id="verify" class="gy" > Verify</button>
+                </div>
+                    
+                </div>
+                   <form id="myForm" >
+            <input type="text" id="name" placeholder="Name" required />
+                   
+             <input type="email" id="email" placeholder="Email" required/>
+            
+             <input type="password" id = "password"  placeholder="Password" required/>
+             <button  id="submit" onclick="signup(event)" class="bg" style="width: 100%">Create Account</button>
+                    
+            </form>
+
+             
+             </div>
+        </div>
+    </div>
+</body>
+<script>
+    let otp_arr = [];
+
+
+    
+
+
+function signin(){
+    var all_User = JSON.parse(localStorage.getItem('user_details'))
+    console.log(all_User);
+
+let count = 0
+   
+   let myForm = document.getElementById('myForm');
+
+   let name = myForm.name.value;
+   let email = myForm.email.value;
+   let password = myForm.password.value;
+  if ( all_User === null){
+      return false;
+  }
+   for (let i = 0; i < all_User.length; i++){
+       if ( email == all_User[i].email){
+         return true;
+       }
+   }
+
+ return false;
+}
+
+
+
+let btn = document.getElementById('btn');
+btn.addEventListener('click',function(){
+    btn.innerText = "Resend"
+    let otp_no = mathrandom();
+   otp_arr.push(otp_no);
+   console.log(otp_no);
+   
+   //console.log(isCheck());
+})
+
+
+function mathrandom(){
+   return Math.floor(Math.random()*1000000)
+}
+
+let verify = document.getElementById('verify');
+
+function verify_otp(){
+let otp = document.getElementById('otp');   
+if ( otp_arr[otp_arr.length - 1] == otp.value ){
+
+   return true;
+}
+else {
+   return false;
+}
+}
+
+
+function isCheck(){
+let otp = document.getElementById('otp');
+
+verify.addEventListener('click',function(){
+  console.log(otp);
+  
+  if ( otp_arr[otp_arr.length - 1] == otp.value ){
+      otp.style.borderColor = 'green';
+    
+swal("Congratulations!", "Verified Successflly!", "success");
+
+  }
+  else {
+    swal("Oops!", "otp is incorrect!", "error");
+
+  }
+})
+}
+isCheck();
+
+
+
+// console.log(mathrandom());
+
+
+
+function signup(e){
+    e.preventDefault();
+  
+    
+    let myForm = document.getElementById('myForm');
+
+    let name = myForm.name.value;
+    let email = myForm.email.value;
+    let password = myForm.password.value;
+
+    if ( signin() && verify_otp()){
+        alert('you are already registered');
+    }
+    else if ( !verify_otp()){
+        alert('Your otp is incorrect');
+    }
+   else {
+    if ( localStorage.getItem('user_details') === null){
+   localStorage.setItem('user_details',JSON.stringify([]));
+
+}
+
+    let user = {
+        name:name,
+        email:email,
+        password:password,
+        product : [],
+    }
+    console.log(user);
+   
+     let arr = JSON.parse(localStorage.getItem('user_details'));
+     //console.log(arr);
+    swal("Congratulations!", "Registered Successflly!", "success")
+     arr.push(user);
+     console.log(arr);
+    localStorage.setItem('user_details',JSON.stringify(arr));
+    
+}
+
+  // console.log(name,email,password);
+}
+
+</script>
+</html>
